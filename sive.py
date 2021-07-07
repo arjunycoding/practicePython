@@ -1,3 +1,5 @@
+print("Welcome! If you are having trouble finding if a number is prime or composite you've come to the right place!")
+number = int(input("Chosse a number and we will find out if it is prime or composite!\n"))
 possibleNumbers = []
 factors = []
 def sive(num):
@@ -11,10 +13,8 @@ def sive(num):
             factors.append(possibleNumbers[i])
         i+=1
     if(factors == [1, num]):
-        print("prime")
+        print(f"{number} is a prime number")
     else:
-        print("composite")
-print("Welcome! If you are having trouble finding if a number is prime or composite you've come to the right place!")
-number = int(input("Chosse a number and we will find out if it is prime or composite!\n"))
+        print(f"{number} is a composite number")
 sive(number)
 print(f"Here is your all the factors for the number {number}:", factors)
