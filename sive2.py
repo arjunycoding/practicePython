@@ -1,7 +1,7 @@
 import math
 def sieve(num):
     if num <= 2:
-        print("False")
+        return False
     else:
         highestFactor = int(math.sqrt(num))
         factors = []
@@ -13,6 +13,6 @@ def sieve(num):
                 else:
                     factors.append(i)
         lastNumber = factors.pop()
-        print(lastNumber == num)
+        return lastNumber == num
 
 sieve(12)
