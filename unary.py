@@ -21,6 +21,7 @@ def unairy(lst):
                         return False
                 return True  
     else:
+        print("not a list")
         return False
 
 
@@ -95,13 +96,12 @@ def u2n(lst):
             for i in range(len(cLst)):
                 if cLst.pop(0).lower() == "o":
                     number += 1
-                    print(isNeg, number)
         if isNeg == False:
             return number
         elif isNeg == True:
             return -number
     else:
-        return "not a number"
+        return "not a list"
 def n2u(num):
     if isinstance(num, int) == True:
         unairyLst = []
@@ -112,24 +112,11 @@ def n2u(num):
                 unairyLst.append("o")
             return unairyLst
         elif numStr[0] == numStr:
-            for i in range(int(numStr[0])):
+            for i in range(int(numStr)):
                 unairyLst.append("o")
             return unairyLst
     else:
         return "not a number"
 
 
-lst = []
-number = -2
-unairyList = unairy(lst)
-uzeroList = uzero(lst)
-uisnegList = uisneg(lst)
-uisposList = uispos(lst)
-u2nList = u2n(lst)
-n2uList = n2u(number)
-print(f"Is {lst} a unairy number: {unairyList}")
-print(f"Is {lst} a equal to zero: {uzeroList}")
-print(f"Is {lst} a negitive number: {uisnegList}")
-print(f"Is {lst} a positive number: {uisposList}")
-print(f"{lst} in number: {u2nList}")
-print(f"{number} in unairy: {n2uList}")
+lst = ["o", "o"]
