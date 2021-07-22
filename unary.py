@@ -168,7 +168,6 @@ def uequal(lst1, lst2):
             return True
         else:
             return False
-            
     else:
         return "not a unairy list"
 def une(lst1, lst2):
@@ -187,10 +186,81 @@ def ugt(lst1, lst2):
                 return False
             elif isGreater == False:
                 return True
-        
+        elif uispos(lst1) and uisneg(lst2) == True:
+            return True
+        elif uisneg(lst1) and uispos(lst2) == True:
+            return False
+        elif uzero(lst1) and uzero(lst2) == True:
+            return False
+        elif uzero(lst1) and uispos(lst2) == True:
+            return False
+        elif uzero(lst1) and uisneg(lst2) == True:
+            return True
+        elif uzero(lst2) and uispos(lst1) == True:
+            return True
+        elif uzero(lst2) and uisneg(lst1) == True:
+            return False 
     else:
         return "not a unary list" 
 
-lst1 = ["m", "o", "o"] # -2
-lst2 = ["o", "o", "o"] # -3
-print(uequal(lst1, lst2))
+def ugte(lst1, lst2):
+    if bothunary(lst1, lst2) == True:
+        if ugt(lst1, lst2) == True or uequal(lst1, lst2) == True:
+            return True
+        else:
+            return False
+    else:
+        return "not a unairy list"
+def uls(lst1, lst2):
+    if bothunary(lst1, lst2) == True:
+        if ugt(lst1, lst2) == True:
+            return False
+        else:
+            return True
+    else:
+        return "not a unairy number"
+def ulse(lst1, lst2):
+    if bothunary(lst1, lst2) == True:
+        if uls(lst1, lst2) == True or uequal(lst1, lst2) == True:
+            return True
+        else:
+            return False
+    else:
+        return "not a unairy number"
+
+def uinc(lst):
+    if unairy(lst):
+        cLst = lst.copy()
+        if uispos(lst) == True:
+            cLst.append("o")
+            return cLst
+        elif uisneg(lst) == True:
+            cLst.pop(len(cLst) - 1)
+            if uzero(cLst):
+                cLst = []
+            return cLst
+        elif uzero(cLst):
+            cLst = ["o"]
+            return cLst
+    else:
+        return "not a unairy list"
+def udec(lst):
+    if unairy(lst):
+        cLst = lst.copy()
+        if uispos(lst) == True:
+            cLst.pop()
+            if uzero(cLst):
+                cLst = []
+                return cLst
+            return cLst
+        elif uisneg(lst) == True:
+            cLst.append("o")
+        elif uzero(cLst):
+            cLst = ["m", "o"]
+            return cLst
+    else:
+        return "not a unairy list"
+
+lst1 = ["o", "o"] # -2
+lst2 = [] # -3
+print(udec(lst1))
