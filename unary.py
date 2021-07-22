@@ -23,8 +23,14 @@ def unairy(lst):
     else:
         print("not a list")
         return False
-
-
+# Check If Both The Unairy List Are A unariy List Function
+def bothunary(lst1, lst2):
+    unairy1 = unairy(lst1)
+    unairy2 = unairy(lst2)
+    if unairy1 == True and unairy2 == True:
+        return True
+    else:
+        return False
 # Unairy Is Zero? Function
 def uzero(lst):
     if isinstance(lst, list) == True:
@@ -118,5 +124,73 @@ def n2u(num):
     else:
         return "not a number"
 
+def uneg(lst):
+    if unairy(lst) == True:
+        cLst = lst.copy()
+        if uisneg(lst) == True:
+            cLst.pop(0)
+            return cLst
+        elif uispos(lst) == True:
+            cLst[0:0] = ["m"]
+            return cLst
+    else:
+        return "not a unary list"
 
-lst = ["o", "o"]
+def uabs(lst):
+    if unairy(lst) == True:
+        cLst = lst.copy()
+        if uisneg(lst) == True:
+            cLst.pop(0)
+            return cLst
+        elif uispos(lst) == True:
+            return cLst
+    else:
+        return "not a unary list"
+def uequal(lst1, lst2):
+    if bothunary(lst1, lst2) == True:
+        if uispos(lst1) and uisneg(lst2) or uisneg(lst1) and uispos(lst2):
+            return False
+        elif uispos(lst1) and uispos(lst2):
+            lenOfLst1 = len(lst1)
+            lenOfLst2 = len(lst2)
+            if lenOfLst1 == lenOfLst2:
+                return True
+            else:
+                return False
+        elif uisneg(lst1) and uisneg(lst2):
+            lenOfLst1 = len(lst1)
+            lenOfLst2 = len(lst2)
+            if lenOfLst1 == lenOfLst2:
+                return True
+            else:
+                return False
+        elif uzero(lst1) and uzero(lst2) == True:
+            return True
+        else:
+            return False
+            
+    else:
+        return "not a unairy list"
+def une(lst1, lst2):
+    if uequal(lst1, lst2) == True:
+        return False
+    elif uequal(lst1, lst2) == False:
+        return True
+
+def ugt(lst1, lst2):
+    if bothunary(lst1, lst2) == True:
+        isGreater = len(lst1) > len(lst2)
+        if uispos(lst1) and uispos(lst2) == True:
+            return len(lst1) > len(lst2)
+        elif uisneg(lst1) and uisneg(lst2) == True:
+            if isGreater == True:
+                return False
+            elif isGreater == False:
+                return True
+        
+    else:
+        return "not a unary list" 
+
+lst1 = ["m", "o", "o"] # -2
+lst2 = ["o", "o", "o"] # -3
+print(uequal(lst1, lst2))
