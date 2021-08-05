@@ -259,8 +259,97 @@ def udec(lst):
             cLst = ["m", "o"]
             return cLst
     else:
-        return "not a unairy list"
+        return "not a unary list"
+def uadd(lst1, lst2):
+    if bothunary(lst1, lst2):
+        cLst1 = lst1.copy()
+        cLst2 = lst2.copy()
+        if uzero(lst1):
+            return lst2
+        elif uzero(lst2):
+            return lst1
+        elif uispos(lst1) and uispos(lst2) == True:
+            return lst1 + lst2
+        elif uisneg(lst1) and uisneg(lst2) == True:
+            for i in range(len(cLst2)):
+                if len(cLst1) == 2:
+                    cLst1 == []
+                if cLst1 == [] or cLst1[0] == "o":
+                    cLst1.append("o")
+                else:
+                    cLst1.pop()
+                print(cLst1, len(cLst1))
+            return cLst1
+        elif uispos(lst1) and uisneg(lst2):
+            for i in range(len(cLst2)-1):
+                if cLst1 == []:
+                    cLst1.append("m", "o")
+                if cLst1 == ["m", "o"]:
+                    cLst1.append("o")
+                else:
+                    cLst1.pop()
+            return cLst1
+        elif uisneg(lst1) and uispos(lst2):
+            for i in range(len(cLst2)):
+                if len(cLst1) == 2:
+                    cLst1 == []
+                if cLst1 == [] or cLst1[0] == "o":
+                    cLst1.append("o")
+                else:
+                    cLst1.pop()
+                print(cLst1, len(cLst1))
+            return cLst1
 
-lst1 = ["o", "o"] # -2
-lst2 = [] # -3
-print(udec(lst1))
+        
+def usub(lst1,lst2):
+    return uadd(lst1,uneg(lst2))
+
+def udivisable(lst1, lst2):
+    if bothunary(lst1, lst2):
+        cLst1 = lst1.copy()
+        cLst2 = lst2.copy()
+        len1 = len(lst1)
+        len2 = len(lst2)
+        divisable = len1 % len2 == 0
+        return divisable
+
+def umult(lst1, lst2):
+    if bothunary(lst1, lst2):
+        cLst1 = lst1.copy()
+        cLst2 = lst2.copy()
+        len1 = len(lst1)
+        len2 = len(lst2)
+        if uispos(lst1) and uispos(lst2) == True:
+            for i in range(len2-1):
+                for j in range(len1):
+                    cLst1.append("o")
+                print(cLst1, len(cLst1))
+        if uisneg(lst1) and uisneg(lst2) == True:
+            len1 = len1-1
+            len2 = len2-1
+            print(len2, len1)
+            for i in range(len2-1):
+                for j in range(len1):
+                    cLst1.append("o")
+            cLst1 = uneg(cLst1)
+
+        if uisneg(lst1) and uispos(lst2) == True:
+            len1 = len1-1
+            print(len2, len1)
+            for i in range(len2):
+                for j in range(len1):
+                    cLst1.append("o")
+
+        if uisneg(lst2) and uispos(lst1) == True:
+            len2 = len2-1
+            print(len2, len1)
+            for i in range(len2):
+                for j in range(len1):
+                    cLst1.append("o")
+            cLst1 =uneg(cLst1)
+        return cLst1
+    else:
+        return "not a unary list"
+lst1 = ["m", "o", "o", "o", "o", "o"] # -5
+lst2 = ["o", "o", "o", "o", "o"] # -3
+print(usub(lst1, lst2))
