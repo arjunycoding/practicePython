@@ -308,8 +308,10 @@ def udivisable(lst1, lst2):
     if bothunary(lst1, lst2):
         cLst1 = lst1.copy()
         cLst2 = lst2.copy()
-        len1 = len(lst1)
-        len2 = len(lst2)
+        cLst1 = uabs(cLst1)
+        cLst2 = uabs(cLst2)
+        len1 = len(cLst1)
+        len2 = len(cLst2)
         divisable = len1 % len2 == 0
         return divisable
 
@@ -350,6 +352,89 @@ def umult(lst1, lst2):
         return cLst1
     else:
         return "not a unary list"
-lst1 = ["m", "o", "o", "o", "o", "o"] # -5
-lst2 = ["o", "o", "o", "o", "o"] # -3
-print(usub(lst1, lst2))
+
+def udiv(lst1, lst2):
+    if bothunary(lst1, lst2):
+        cLst1 = lst1.copy()
+        cLst2 = lst2.copy()
+        number = 0
+        numLst = []
+        if uispos(lst1) and uispos(lst2):
+            for i in lst1:
+                del cLst1[0:len(cLst2)]
+                number += 1
+                if cLst1 == []:
+                    break
+            
+            for i in range(number):
+                numLst.append("o")
+            return numLst
+        if uisneg(lst1) or uisneg(lst2):
+            for i in lst1:
+                del cLst1[0:len(cLst2)]
+                if cLst1 == []:
+                    break
+                number += 1
+            for i in range(number):
+                numLst.append("o")
+            return uneg(numLst)
+        if uisneg(lst1) and uisneg(lst2):
+            uneg(cLst1)
+            uneg(cLst2)
+            for i in lst1:
+                del cLst1[0:len(cLst2)]
+                number += 1
+                if cLst1 == []:
+                    break
+            
+            for i in range(number):
+                numLst.append("o")
+            return numLst
+            
+    else:
+        return "not a unary list"
+def umod(lst1, lst2):
+    if bothunary(lst1, lst2):
+        if udivisable(lst1, lst2) == True:
+            return []
+        else:
+            clst1 = uabs(lst1).copy()
+            clst2 = uabs(lst2).copy()
+            len1 = len(clst1)
+            len2 = len(clst2)
+            remaniderLst = []
+            remanider = len1%len2
+            for i in range(remanider):
+                remaniderLst.append("o")
+            return remaniderLst
+
+    else:
+        return "not a unairy list"
+
+
+def uexp(lst1, lst2):
+    if bothunary(lst1, lst2):
+        clst1 = lst1.copy()
+        clst2 = lst2.copy()
+        if uisneg(clst2):
+            clst2 = uabs(clst2)
+        len1 = len(clst1)
+        len2 = len(clst2)
+        answerLst = []
+        if uispos(clst1) and uispos(clst2):
+            answer = len1 ** len2
+            for i in range(answer):
+                answerLst.append("o")
+            return answerLst
+        if uisneg(clst1):
+            len1-=1
+            answer = len1 ** len2
+            for i in range(answer):
+                answerLst.append("o")
+            return uneg(answerLst)
+        if uzero(clst1):
+            return []
+        if uzero(clst2):
+            return ["o"]
+    else:
+        return "not a unairy list"
