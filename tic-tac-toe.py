@@ -5,7 +5,7 @@ def printTTT(board):
     
     rowPos = 0
     for i in range(3):
-        print("         |         |        ")
+        print(f"{rowPos}        |{rowPos+1}        |{rowPos+2}        ")
         print("    ", end="")
         if board[rowPos] == 1:
             print("x", end="")
@@ -36,5 +36,5 @@ def printTTT(board):
         print("         |         |        ")
         print(" ---------------------------")
         rowPos+=3
-
-printTTT([2,2,1,1,1,2,0,1,0])
+    
+    printTTT([2,2,1,1,1,2,0,1,0])
