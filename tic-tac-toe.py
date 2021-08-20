@@ -36,7 +36,7 @@ def printTTT(board):
         print("         |         |        ")
         print(" ---------------------------")
         rowPos+=3
-
+# CHeck Move
 def checkmove(board, move):
     moveindex = move-1
     if moveindex < 0 or moveindex > 8:
@@ -45,12 +45,13 @@ def checkmove(board, move):
         return True
     else:
         return False
+# Check Turn
 def xoroturn(turn):
     if (turn % 2) != 0:
         return 1
     else:
         return 2
-
+# Check Win
 def checkwin(board, turn):
     xoro = xoroturn(turn)
     xwin = None
@@ -104,6 +105,7 @@ def checkwin(board, turn):
         else:
             return False
 
+# Make Move
 def makemove(board, pos, turn):
     cBoard = board.copy()
     if checkmove(board, pos):
@@ -118,6 +120,7 @@ def makemove(board, pos, turn):
 
 board = [0,0,0,0,0,0,0,0,0]
 turn = 1
+
 def playTTT():
     board = [0,0,0,0,0,0,0,0,0]
     turn = 1
