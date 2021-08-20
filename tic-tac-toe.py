@@ -5,7 +5,7 @@ def printTTT(board):
     
     rowPos = 0
     for i in range(3):
-        print(f"{rowPos}        |{rowPos+1}        |{rowPos+2}        ")
+        print(f"{rowPos+1}        |{rowPos+2}        |{rowPos+3}        ")
         print("    ", end="")
         if board[rowPos] == 1:
             print("x", end="")
@@ -36,6 +36,7 @@ def printTTT(board):
         print("         |         |        ")
         print(" ---------------------------")
         rowPos+=3
+
 def checkmove(board, move):
     moveindex = move-1
     if moveindex < 0 or moveindex > 8:
@@ -50,14 +51,17 @@ def xoroturn(turn):
     else:
         return 2
 
-def checkwin(borad, turn):
+def checkwin(board, turn):
     xoro = xoroturn(turn)
-    printTTT(board)
     xwin = None
     owin = None
+    # [1, 0, 1
+    #  0, 1, 0
+    #  1, 0, 0
+    # ]
     if board[2] == 1 and board[4] == 1 and board[6] == 1:
         xwin = True
-    elif board[0] == 1 and board[6] == 1 and board[8] == 1:
+    elif board[0] == 1 and board[4] == 1 and board[8] == 1:
         xwin = True
     elif board[0] == 1 and board[3] == 1 and board[6] == 1:
         xwin = True
@@ -71,7 +75,7 @@ def checkwin(borad, turn):
         xwin = True
     elif board[6] == 1 and board[7] == 1 and board[8] == 1:
         xwin = True
-    if board[2] == 1 and board[4] == 1 and board[6] == 1:
+    elif board[2] == 2 and board[4] == 2 and board[6] == 2:
         xwin = True
     elif board[0] == 2 and board[6] == 2 and board[8] == 2:
         owin = True
@@ -90,19 +94,71 @@ def checkwin(borad, turn):
     printTTT(board)
     
     if xoroturn(turn) == 1:   
-        if xwin:
-            return xwin
+        if xwin == True:
+            return "xwins"
         else:
             return False
     if xoroturn(turn) == 2:   
         if owin:
-            return owin
+            return "owins"
         else:
             return False
-board = [2,2,1,1,1,2,1,1,0]
-move = checkmove(board, 1)
-turn = 6
-checkturn = xoroturn(turn)
-win = checkwin(board, turn)
-# printTTT(board)
-print(win)
+
+def makemove(board, pos, turn):
+    cBoard = board.copy()
+    if checkmove(board, pos):
+        move = pos-1
+        if xoroturn(turn) == 1:
+            cBoard[move] = 1
+        else:
+            cBoard[move] = 2
+        return cBoard
+    else:
+        print("Not a vaild move")
+
+# board = [1,2,1,2,1,2,1,2,1]
+board = [0,0,0,0,0,0,0,0,0]
+# move = checkmove(board, 1)
+turn = 1
+# pos=1
+# checkturn = xoroturn(turn)
+# win = checkwin(board, turn)
+for i in range(10):
+    if turn == 10:
+        print(checkmove(board, turn))
+        print("It is a draw!")
+        break
+
+    if xoroturn(turn) == 1:
+        print("X's Turn")
+        Xmove = input("What is you move?")
+        Xmove = int(Xmove)
+        if checkmove(board, Xmove) == False:
+            while checkmove(board, Xmove) == False:
+                    Xmove = input(f"Sorry square {Xmove} is already filled. What is you move?")
+                    Xmove = int(Xmove)
+        board = makemove(board, Xmove, turn)
+        printTTT(board)    
+    else:
+        print("O's Turn")
+        Omove = input("What is you move?")
+        Omove = int(Omove)
+        if checkmove(board, Omove) == False:
+            while checkmove(board, Omove) == False:
+                    Omove = input(f"Sorry square {Omove} is already filled. What is you move?")
+                    Omove = int(Omove)
+        board = makemove(board, Omove, turn)
+        printTTT(board)
+    print("work")
+    print(checkwin(board, turn))
+    print("work")
+    if checkwin(board, turn) == "xwin":
+        print("X WINS!!!")
+        break
+    elif checkwin(board, turn) == "owin":
+        print("O WINS!!!")
+        break
+    turn+=1
+# print(win)
+print(checkwin(board, turn))
+# print(checkwin([1, 0, 0, 1, 1, 0, 1, 1, 1], 1))
