@@ -116,49 +116,45 @@ def makemove(board, pos, turn):
     else:
         print("Not a vaild move")
 
-# board = [1,2,1,2,1,2,1,2,1]
 board = [0,0,0,0,0,0,0,0,0]
-# move = checkmove(board, 1)
 turn = 1
-# pos=1
-# checkturn = xoroturn(turn)
-# win = checkwin(board, turn)
-for i in range(10):
-    if turn == 10:
-        print(checkmove(board, turn))
-        print("It is a draw!")
-        break
+def playTTT():
+    board = [0,0,0,0,0,0,0,0,0]
+    turn = 1
+    for i in range(10):
+        if turn == 10:
+            print("It is a draw!")
+            break
 
-    if xoroturn(turn) == 1:
-        print("X's Turn")
-        Xmove = input("What is you move?")
-        Xmove = int(Xmove)
-        if checkmove(board, Xmove) == False:
-            while checkmove(board, Xmove) == False:
-                    Xmove = input(f"Sorry square {Xmove} is already filled. What is you move?")
-                    Xmove = int(Xmove)
-        board = makemove(board, Xmove, turn)
-        printTTT(board)    
-    else:
-        print("O's Turn")
-        Omove = input("What is you move?")
-        Omove = int(Omove)
-        if checkmove(board, Omove) == False:
-            while checkmove(board, Omove) == False:
-                    Omove = input(f"Sorry square {Omove} is already filled. What is you move?")
-                    Omove = int(Omove)
-        board = makemove(board, Omove, turn)
-        printTTT(board)
-    print("work")
-    print(checkwin(board, turn))
-    print("work")
-    if checkwin(board, turn) == "xwin":
-        print("X WINS!!!")
-        break
-    elif checkwin(board, turn) == "owin":
-        print("O WINS!!!")
-        break
-    turn+=1
-# print(win)
-print(checkwin(board, turn))
-# print(checkwin([1, 0, 0, 1, 1, 0, 1, 1, 1], 1))
+        if xoroturn(turn) == 1:
+            print("X's Turn")
+            Xmove = input("What is you move?")
+            while Xmove == "":
+                Xmove = input("Sorry, you need to enter a number. What is you move?")
+            Xmove = int(Xmove)
+            if checkmove(board, Xmove) == False:
+                while checkmove(board, Xmove) == False:
+                        Xmove = input(f"Sorry square {Xmove} is already filled. What is you move?")
+                        Xmove = int(Xmove)
+            board = makemove(board, Xmove, turn)
+            printTTT(board)    
+        else:
+            print("O's Turn")
+            Omove = input("What is you move?")
+            while Xmove == "":
+                Xmove = input("Sorry, you need to enter a number. What is you move?")
+            Omove = int(Omove)
+            if checkmove(board, Omove) == False:
+                while checkmove(board, Omove) == False:
+                        Omove = input(f"Sorry square {Omove} is already filled. What is you move?")
+                        Omove = int(Omove)
+            board = makemove(board, Omove, turn)
+            printTTT(board)
+        win = checkwin(board, turn)
+        if checkwin(board, turn) == "xwins":
+            print("X has won the game!!!")
+            break
+        elif checkwin(board, turn) == "owins":
+            print("O has won the game!!!")
+            break
+        turn+=1
