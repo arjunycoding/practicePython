@@ -92,7 +92,6 @@ def checkwin(board, turn):
         owin = True
     elif board[6] == 2 and board[7] == 2 and board[8] == 2:
         owin = True
-    printTTT(board)
     
     if xoroturn(turn) == 1:   
         if xwin == True:
@@ -124,40 +123,72 @@ turn = 1
 def playTTT():
     board = [0,0,0,0,0,0,0,0,0]
     turn = 1
-    for i in range(10):
-        if turn == 10:
-            print("It is a draw!")
-            break
+    playing = True
+    print("""
+    Welcome To The Tic-Tac-Toe Game!
+    Grab a friend and begin!
+    Inscturctions:
+        Enter a number between 1-9 
+        The number you input will make a x or o apper in the square that contains your number
+    """)
+    printTTT(board)
+    while playing == True:
+        for i in range(10):
+            if turn == 10:
+                print("It is a draw!")
+                playAgain = input("Would you like to play again type y/n or yes/no: ")
+                if playAgain.lower() == "y" or playAgain.lower() == "yes":
+                    board = [0,0,0,0,0,0,0,0,0]
+                    turn = 1
+                    playing = True
+                elif playAgain.lower() == "n" or playAgain.lower() == "no":
+                    playing = False
+                    print("Thank you for playing Tic-Tac-Toe! Hope to see you again soon!")
 
-        if xoroturn(turn) == 1:
-            print("X's Turn")
-            Xmove = input("What is you move?")
-            while Xmove == "":
-                Xmove = input("Sorry, you need to enter a number. What is you move?")
-            Xmove = int(Xmove)
-            if checkmove(board, Xmove) == False:
-                while checkmove(board, Xmove) == False:
-                        Xmove = input(f"Sorry square {Xmove} is already filled. What is you move?")
-                        Xmove = int(Xmove)
-            board = makemove(board, Xmove, turn)
-            printTTT(board)    
-        else:
-            print("O's Turn")
-            Omove = input("What is you move?")
-            while Xmove == "":
-                Xmove = input("Sorry, you need to enter a number. What is you move?")
-            Omove = int(Omove)
-            if checkmove(board, Omove) == False:
-                while checkmove(board, Omove) == False:
-                        Omove = input(f"Sorry square {Omove} is already filled. What is you move?")
-                        Omove = int(Omove)
-            board = makemove(board, Omove, turn)
-            printTTT(board)
-        win = checkwin(board, turn)
-        if checkwin(board, turn) == "xwins":
-            print("X has won the game!!!")
-            break
-        elif checkwin(board, turn) == "owins":
-            print("O has won the game!!!")
-            break
-        turn+=1
+            if xoroturn(turn) == 1:
+                print("X's Turn")
+                Xmove = input("What is you move?")
+                while Xmove == "":
+                    Xmove = input("Sorry, you need to enter a number. What is you move?")
+                Xmove = int(Xmove)
+                if checkmove(board, Xmove) == False:
+                    while checkmove(board, Xmove) == False:
+                            Xmove = input(f"Sorry square {Xmove} is already filled. What is you move?")
+                            while Xmove == "":
+                                Xmove = input("Sorry, you need to enter a number. What is you move?")
+                            Xmove = int(Xmove)
+                board = makemove(board, Xmove, turn)
+                printTTT(board)    
+            else:
+                print("O's Turn")
+                Omove = input("What is you move?")
+                while Xmove == "":
+                    Xmove = input("Sorry, you need to enter a number. What is you move?")
+                Omove = int(Omove)
+                if checkmove(board, Omove) == False:
+                    while checkmove(board, Omove) == False:
+                            Omove = input(f"Sorry square {Omove} is already filled. What is you move?")
+                            while Omove == "":
+                                Omove = input("Sorry, you need to enter a number. What is you move?")
+                            Omove = int(Omove)
+                board = makemove(board, Omove, turn)
+                printTTT(board)
+            win = checkwin(board, turn)
+            if checkwin(board, turn) == "xwins":
+                print("X has won the game!!!")
+                break
+            elif checkwin(board, turn) == "owins":
+                print("O has won the game!!!")
+                break
+            turn+=1
+
+        playAgain = input("Would you like to play again type y/n or yes/no: ")
+        if playAgain.lower() == "y" or playAgain.lower() == "yes":
+            board = [0,0,0,0,0,0,0,0,0]
+            turn = 1
+            playing = True
+        elif playAgain.lower() == "n" or playAgain.lower() == "no":
+            playing = False
+            print("Thank you for playing Tic-Tac-Toe! Hope to see you again soon!")
+
+playTTT()
