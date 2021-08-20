@@ -36,7 +36,7 @@ def printTTT(board):
         print("         |         |        ")
         print(" ---------------------------")
         rowPos+=3
-
+# CHeck Move
 def checkmove(board, move):
     moveindex = move-1
     if moveindex < 0 or moveindex > 8:
@@ -45,12 +45,13 @@ def checkmove(board, move):
         return True
     else:
         return False
+# Check Turn
 def xoroturn(turn):
     if (turn % 2) != 0:
         return 1
     else:
         return 2
-
+# Check Win
 def checkwin(board, turn):
     xoro = xoroturn(turn)
     xwin = None
@@ -104,6 +105,7 @@ def checkwin(board, turn):
         else:
             return False
 
+# Makem Move
 def makemove(board, pos, turn):
     cBoard = board.copy()
     if checkmove(board, pos):
@@ -118,11 +120,9 @@ def makemove(board, pos, turn):
 
 # board = [1,2,1,2,1,2,1,2,1]
 board = [0,0,0,0,0,0,0,0,0]
-# move = checkmove(board, 1)
 turn = 1
-# pos=1
-# checkturn = xoroturn(turn)
-# win = checkwin(board, turn)
+
+# Play tic tac toe
 for i in range(10):
     if turn == 10:
         print(checkmove(board, turn))
