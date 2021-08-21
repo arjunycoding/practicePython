@@ -53,13 +53,8 @@ def xoroturn(turn):
         return 2
 # Check Win
 def checkwin(board, turn):
-    xoro = xoroturn(turn)
     xwin = None
     owin = None
-    # [1, 0, 1
-    #  0, 1, 0
-    #  1, 0, 0
-    # ]
     if board[2] == 1 and board[4] == 1 and board[6] == 1:
         xwin = True
     elif board[0] == 1 and board[4] == 1 and board[8] == 1:
@@ -76,9 +71,9 @@ def checkwin(board, turn):
         xwin = True
     elif board[6] == 1 and board[7] == 1 and board[8] == 1:
         xwin = True
-    elif board[2] == 2 and board[4] == 2 and board[6] == 2:
-        xwin = True
-    elif board[0] == 2 and board[6] == 2 and board[8] == 2:
+    if board[2] == 2 and board[4] == 2 and board[6] == 2:
+        owin = True
+    elif board[0] == 2 and board[4] == 2 and board[8] == 2:
         owin = True
     elif board[0] == 2 and board[3] == 2 and board[6] == 2:
         owin = True
@@ -99,7 +94,7 @@ def checkwin(board, turn):
         else:
             return False
     if xoroturn(turn) == 2:   
-        if owin:
+        if owin == True:
             return "owins"
         else:
             return False
@@ -174,7 +169,7 @@ def playTTT():
                 board = makemove(board, Omove, turn)
                 printTTT(board)
             win = checkwin(board, turn)
-            if checkwin(board, turn) == "xwins":
+            if win == "xwins":
                 print("X has won the game!!!")
                 break
             elif checkwin(board, turn) == "owins":
@@ -192,3 +187,33 @@ def playTTT():
             print("Thank you for playing Tic-Tac-Toe! Hope to see you again soon!")
 
 playTTT()
+
+# O's Turn
+# What is you move?7
+# 1        |2        |3        
+#     x    |    o    |    o    
+#          |         |        
+#  ---------------------------
+# 4        |5        |6        
+#     x    |    o    |    x    
+#          |         |        
+#  ---------------------------
+# 7        |8        |9        
+#     o    |         |    x    
+#          |         |        
+#  ---------------------------
+# X's Turn
+# What is you move?8
+# 1        |2        |3        
+#     x    |    o    |    o    
+#          |         |        
+#  ---------------------------
+# 4        |5        |6        
+#     x    |    o    |    x    
+#          |         |        
+#  ---------------------------
+# 7        |8        |9        
+#     o    |    x    |    x    
+#          |         |        
+#  ---------------------------
+# X has won the game!!!
